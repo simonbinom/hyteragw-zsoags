@@ -56,7 +56,7 @@ class TimeslotInfo(LoggingTrait):
 
     def regenerate_mmdvm_stream_id(self, use_random: bool = True):
         self.mmdvm_stream_id = (
-            os.urandom(4) if use_random else ((self.mmdvm_stream_id + 1) & 0xFFFFFFFF)
+            os.urandom(4) if use_random else (int.from_bytes(self.mmdvm_stream_id, byteorder='big') + 1)
         )
 
 
